@@ -13,7 +13,8 @@
 
 #define DEFAULT 0
 #define NUM     1
-#define MAGIC   2
+#define NAV     2
+#define MAGIC   3
 
 / {
     behaviors {
@@ -133,26 +134,47 @@
             &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                               &kp Y     &kp U   &kp I          &kp O          &kp P       &kp BSLH
             &kp ESC        &hml LGUI A  &hml LALT S  &hml LCTRL D  &hml LSHFT F  &kp G                                                                      &kp H     &hmr RSHFT J  &hmr RCTRL K  &hmr RALT L  &kp RET         &kp SQT
             &kp GRAVE      &kp Z    &kp X       &kp C       &kp V       &kp B   &kp LSHFT   &kp LCTRL   &mo NUM    &kp LGUI  &kp RCTRL &kp RSHFT            &kp N     &kp M   &kp COMMA      &kp DOT        &kp FSLH    &kp PG_UP
-            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &kp LALT   &kp RALT  &kp RET   &lt NUM SPACE                  &kp UP  &kp DOWN       &kp LBKT       &kp RBKT    &kp PG_DN
+            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &kp LALT   &kp RALT  &kp RET   &lt NAV SPACE                  &kp UP  &kp DOWN       &kp LBKT       &kp RBKT    &kp PG_DN
             >;
         };
 
         num_layer {
             // ---------------------------------------------------------------------------------------------------------------------------------
+            // symbols layer — matches altair_x layer 1
             // |       |     |     |      |      |                                                               |       |       |      |       |      |
             // |       |     |     |      |      |      |                                                 |      |       |       |      |       |      |
-            // |       |  1  |  2  |  3   |  4   |  5   |                                                 |  6   |   7   |   8   |  9   |   0   |      |
-            // |       |  !  |  @  |  #   |  $   |  %   |                                                 |  ^   |   &   |   *   |  =   |   -   |      |
-            // |       |  {  |  [  |  (   |  _   |      |       |       |       | |       |       |       |  )   |   ]   |   }   |  ;   |   '   |      |
+            // |       |  +  |  &  |  [   |  ]   |  /   |                                                 |  \   |   ;   |   :   |  $   | BSPC  |      |
+            // |       |  -  |  _  |  {   |  }   |  =   |                                                 |  ~   |   ,   |   .   |  %   |   ^   |      |
+            // |       |  #  |  @  |  (   |  )   |  !   |       |       |       | |       |       |       |  |   |   '   |   "   |  `   |       |      |
             // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |      |       |      |
 
             bindings = <
-            &trans         &trans   &trans      &trans      &trans                                                                                                      &trans    &trans       &trans         &trans      &trans
-            &trans         &trans   &trans      &trans      &trans      &trans                                                                              &trans      &trans    &trans       &trans         &trans      &trans
-            &trans         &kp N1   &kp N2      &kp N3      &kp N4      &kp N5                                                                             &kp N6      &kp N7    &kp N8       &kp N9         &kp N0      &trans
-            &trans         &kp EXCL &kp AT      &kp HASH    &kp DLLR    &kp PRCNT                                                                          &kp CARET   &kp AMPS  &kp ASTRK    &kp EQUAL      &kp MINUS   &trans
-            &trans         &kp LBRC &kp LBKT    &kp LPAR    &kp UNDER   &none   &trans      &trans      &trans     &trans    &trans    &trans               &kp RPAR    &kp RBKT  &kp RBRC     &kp SEMI       &kp SQT     &trans
-            &trans         &trans   &trans      &trans      &trans              &trans      &trans      &trans     &trans    &trans    &trans                           &trans    &trans       &trans         &trans      &trans
+            &trans         &trans     &trans      &trans      &trans                                                                                                      &trans      &trans       &trans         &trans      &trans
+            &trans         &trans     &trans      &trans      &trans      &trans                                                                              &trans      &trans      &trans       &trans         &trans      &trans
+            &trans         &kp PLUS   &kp AMPS    &kp LBKT    &kp RBKT    &kp FSLH                                                                           &kp BSLH    &kp SEMI    &kp COLON    &kp DLLR       &kp BSPC    &trans
+            &trans         &kp MINUS  &kp UNDER   &kp LBRC    &kp RBRC    &kp EQUAL                                                                          &kp TILDE   &kp COMMA   &kp DOT      &kp PRCNT      &kp CARET   &trans
+            &trans         &kp HASH   &kp AT      &kp LPAR    &kp RPAR    &kp EXCL  &trans      &trans      &trans     &trans    &trans    &trans             &kp PIPE    &kp SQT     &kp DQT      &kp GRAVE      &trans      &trans
+            &trans         &trans     &trans      &trans      &trans                &trans      &trans      &trans     &trans    &trans    &trans                         &trans      &trans       &trans         &trans      &trans
+            >;
+        };
+
+        nav_layer {
+            // ---------------------------------------------------------------------------------------------------------------------------------
+            // nav + numpad layer — matches altair_x layer 2
+            // |       |     |     |      |      |                                                               |       |       |      |       |      |
+            // |       |     |     |      |      |      |                                                 |      |       |       |      |       |      |
+            // |       |     |     |      |  *   | F11  |                                                 |  ;   |   0   |   1   |  2   | BSPC  |      |
+            // |       | TAB | LEFT| DOWN |  UP  | RIGHT|                                                 |  .   |   3   |   4   |  5   |   6   |      |
+            // |       |     |     | ESC  | TAB  |  *   |       |       |       | |       |       |       |  ,   |   7   |   8   |  9   |       |      |
+            // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |      |       |      |
+
+            bindings = <
+            &trans         &trans     &trans      &trans      &trans                                                                                                      &trans      &trans       &trans         &trans      &trans
+            &trans         &trans     &trans      &trans      &trans      &trans                                                                              &trans      &trans      &trans       &trans         &trans      &trans
+            &trans         &trans     &trans      &trans      &kp ASTRK   &kp F11                                                                             &kp SEMI    &kp N0      &kp N1       &kp N2         &kp BSPC    &trans
+            &trans         &kp TAB    &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT                                                                           &kp DOT     &kp N3      &kp N4       &kp N5         &kp N6      &trans
+            &trans         &trans     &trans      &kp ESC     &kp TAB     &kp ASTRK &trans      &trans      &trans     &trans    &trans    &trans              &kp COMMA   &kp N7      &kp N8       &kp N9         &trans      &trans
+            &trans         &trans     &trans      &trans      &trans                &trans      &trans      &trans     &trans    &trans    &trans                          &trans      &trans       &trans         &trans      &trans
             >;
         };
 
