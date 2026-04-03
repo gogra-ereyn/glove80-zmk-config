@@ -145,7 +145,7 @@
             &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp FSLH                                                                             &kp Y     &kp U   &kp I          &kp O          &kp P       &kp BSLH
             &kp ESC        &kp A    &hml LALT S  &hml LCTRL D  &hml LSHFT F  &kp G                                                                           &kp H     &hmr RSHFT J  &hmr RCTRL K  &hmr RALT L  &kp RET         &kp SQT
             &kp GRAVE      &kp Z    &kp X       &kp C       &lt NUM V   &kp T   &kp LSHFT   &kp LCTRL   &kp LALT   &kp RALT  &kp RCTRL &kp RSHFT             &kp B     &kp N   &kp M          &kp ESC        &sl I3      &kp PG_UP
-            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &mo SYM    &kp SPACE &mo NUM   &none                           &kp UP  &kp DOWN       &kp LBKT       &kp RBKT    &kp PG_DN
+            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &mo SYM     &kp DEL     &kp BSPC    &none     &mo NUM   &kp SPACE                           &kp UP  &kp DOWN       &kp LBKT       &kp RBKT    &kp PG_DN
             >;
         };
 
