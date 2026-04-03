@@ -12,9 +12,11 @@
 #include <dt-bindings/zmk/rgb.h>
 
 #define DEFAULT 0
-#define NUM     1
-#define NAV     2
-#define MAGIC   3
+#define SYM     1
+#define NUM     2
+#define I3      3
+#define GAMING  4
+#define MAGIC   5
 
 / {
     behaviors {
@@ -67,6 +69,15 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&rgb_ug_status_macro>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+        combo_zx_gui {
+            timeout-ms = <50>;
+            key-positions = <47 48>;
+            bindings = <&sk LGUI>;
         };
     };
 
@@ -123,58 +134,86 @@
             // ---------------------------------------------------------------------------------------------------------------------------------
             // |  F1   |  F2 |  F3 |  F4  |  F5  |                                                               |  F6   |  F7   |  F8  |   F9  |  F10 |
             // |  =    |  1  |  2  |  3   |  4   |  5   |                                                 |  6   |   7   |   8   |  9   |   0   |   -  |
-            // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   \  |
-            // |  ESC  | G/A | A/S | C/D  | S/F  |  G   |                                                 |  H   |  S/J  |  C/K  | A/L  |  RET  |   '  |
-            // |   `   |  Z  |  X  |  C   |  V   |  B   | LSHFT | LCTRL | NUM   | | LGUI  | RCTRL | RSHFT |  N   |   M   |   ,   |  .   |   /   | PGUP |
-            // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   |NUM/SPC|      |  UP   | DOWN  |  [   |   ]   | PGDN |
+            // |  TAB  |  Q  |  W  |  E   |  R   |  /   |                                                 |  Y   |   U   |   I   |  O   |   P   |   \  |
+            // |  ESC  |  A  | A/S | C/D  | S/F  |  G   |                                                 |  H   |  S/J  |  C/K  | A/L  |  RET  |   '  |
+            // |   `   |  Z  |  X  |  C   |NUM/V |  T   | LSHFT | LCTRL | LALT  | | RALT  | RCTRL | RSHFT |  B   |   N   |   M   | ESC  |  i3   | PGUP |
+            // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | SYM   | | SPC   |  NUM  |       |      |  UP   | DOWN  |  [   |   ]   | PGDN |
 
             bindings = <
             &kp F1         &kp F2   &kp F3      &kp F4      &kp F5                                                                                                    &kp F6  &kp F7         &kp F8         &kp F9      &kp F10
             &kp EQUAL      &kp N1   &kp N2      &kp N3      &kp N4      &kp N5                                                                              &kp N6    &kp N7  &kp N8         &kp N9         &kp N0      &kp MINUS
-            &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                               &kp Y     &kp U   &kp I          &kp O          &kp P       &kp BSLH
-            &kp ESC        &hml LGUI A  &hml LALT S  &hml LCTRL D  &hml LSHFT F  &kp G                                                                      &kp H     &hmr RSHFT J  &hmr RCTRL K  &hmr RALT L  &kp RET         &kp SQT
-            &kp GRAVE      &kp Z    &kp X       &kp C       &kp V       &kp B   &kp LSHFT   &kp LCTRL   &mo NUM    &kp LGUI  &kp RCTRL &kp RSHFT            &kp N     &kp M   &kp COMMA      &kp DOT        &kp FSLH    &kp PG_UP
-            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &kp LALT   &kp RALT  &kp RET   &lt NAV SPACE                  &kp UP  &kp DOWN       &kp LBKT       &kp RBKT    &kp PG_DN
+            &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp FSLH                                                                             &kp Y     &kp U   &kp I          &kp O          &kp P       &kp BSLH
+            &kp ESC        &kp A    &hml LALT S  &hml LCTRL D  &hml LSHFT F  &kp G                                                                           &kp H     &hmr RSHFT J  &hmr RCTRL K  &hmr RALT L  &kp RET         &kp SQT
+            &kp GRAVE      &kp Z    &kp X       &kp C       &lt NUM V   &kp T   &kp LSHFT   &kp LCTRL   &kp LALT   &kp RALT  &kp RCTRL &kp RSHFT             &kp B     &kp N   &kp M          &kp ESC        &sl I3      &kp PG_UP
+            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &mo SYM    &kp SPACE &mo NUM   &none                           &kp UP  &kp DOWN       &kp LBKT       &kp RBKT    &kp PG_DN
             >;
         };
 
-        num_layer {
+        sym_layer {
             // ---------------------------------------------------------------------------------------------------------------------------------
             // symbols layer — matches altair_x layer 1
             // |       |     |     |      |      |                                                               |       |       |      |       |      |
             // |       |     |     |      |      |      |                                                 |      |       |       |      |       |      |
             // |       |  +  |  &  |  [   |  ]   |  /   |                                                 |  \   |   ;   |   :   |  $   | BSPC  |      |
             // |       |  -  |  _  |  {   |  }   |  =   |                                                 |  ~   |   ,   |   .   |  %   |   ^   |      |
-            // |       |  #  |  @  |  (   |  )   |  !   |       |       |       | |       |       |       |  |   |   '   |   "   |  `   |       |      |
+            // |       |  #  |  @  |  (   |  )   |  !   |       |       |       | |GAMING|       |       |  |   |   '   |   "   |  `   |       |      |
             // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |      |       |      |
 
             bindings = <
-            &trans         &trans     &trans      &trans      &trans                                                                                                      &trans      &trans       &trans         &trans      &trans
-            &trans         &trans     &trans      &trans      &trans      &trans                                                                              &trans      &trans      &trans       &trans         &trans      &trans
-            &trans         &kp PLUS   &kp AMPS    &kp LBKT    &kp RBKT    &kp FSLH                                                                           &kp BSLH    &kp SEMI    &kp COLON    &kp DLLR       &kp BSPC    &trans
-            &trans         &kp MINUS  &kp UNDER   &kp LBRC    &kp RBRC    &kp EQUAL                                                                          &kp TILDE   &kp COMMA   &kp DOT      &kp PRCNT      &kp CARET   &trans
-            &trans         &kp HASH   &kp AT      &kp LPAR    &kp RPAR    &kp EXCL  &trans      &trans      &trans     &trans    &trans    &trans             &kp PIPE    &kp SQT     &kp DQT      &kp GRAVE      &trans      &trans
-            &trans         &trans     &trans      &trans      &trans                &trans      &trans      &trans     &trans    &trans    &trans                         &trans      &trans       &trans         &trans      &trans
+            &trans         &trans     &trans      &trans      &trans                                                                                                      &trans        &trans       &trans         &trans      &trans
+            &trans         &trans     &trans      &trans      &trans      &trans                                                                              &trans      &trans        &trans       &trans         &trans      &trans
+            &trans         &kp PLUS   &kp AMPS    &kp LBKT    &kp RBKT    &kp FSLH                                                                           &kp BSLH    &kp SEMI      &kp COLON    &kp DLLR       &kp BSPC    &trans
+            &trans         &kp MINUS  &kp UNDER   &kp LBRC    &kp RBRC    &kp EQUAL                                                                          &kp TILDE   &kp COMMA     &kp DOT      &kp PRCNT      &kp CARET   &trans
+            &trans         &kp HASH   &kp AT      &kp LPAR    &kp RPAR    &kp EXCL  &trans      &trans      &trans     &to GAMING &trans   &trans             &kp PIPE    &kp SQT       &kp DQT      &kp GRAVE      &trans      &trans
+            &trans         &trans     &trans      &trans      &trans                &trans      &trans      &trans     &trans     &trans   &trans                         &trans        &trans       &trans         &trans      &trans
             >;
         };
 
-        nav_layer {
+        num_layer {
             // ---------------------------------------------------------------------------------------------------------------------------------
-            // nav + numpad layer — matches altair_x layer 2
+            // num + nav layer — matches altair_x layer 2
             // |       |     |     |      |      |                                                               |       |       |      |       |      |
             // |       |     |     |      |      |      |                                                 |      |       |       |      |       |      |
             // |       |     |     |      |  *   | F11  |                                                 |  ;   |   0   |   1   |  2   | BSPC  |      |
             // |       | TAB | LEFT| DOWN |  UP  | RIGHT|                                                 |  .   |   3   |   4   |  5   |   6   |      |
-            // |       |     |     | ESC  | TAB  |  *   |       |       |       | |       |       |       |  ,   |   7   |   8   |  9   |       |      |
+            // |       |     |     | ESC  | TAB  |  *   |       |       |       | |GAMING|       |       |  ,   |   7   |   8   |  9   |       |      |
             // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |      |       |      |
 
             bindings = <
-            &trans         &trans     &trans      &trans      &trans                                                                                                      &trans      &trans       &trans         &trans      &trans
-            &trans         &trans     &trans      &trans      &trans      &trans                                                                              &trans      &trans      &trans       &trans         &trans      &trans
-            &trans         &trans     &trans      &trans      &kp ASTRK   &kp F11                                                                             &kp SEMI    &kp N0      &kp N1       &kp N2         &kp BSPC    &trans
-            &trans         &kp TAB    &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT                                                                           &kp DOT     &kp N3      &kp N4       &kp N5         &kp N6      &trans
-            &trans         &trans     &trans      &kp ESC     &kp TAB     &kp ASTRK &trans      &trans      &trans     &trans    &trans    &trans              &kp COMMA   &kp N7      &kp N8       &kp N9         &trans      &trans
-            &trans         &trans     &trans      &trans      &trans                &trans      &trans      &trans     &trans    &trans    &trans                          &trans      &trans       &trans         &trans      &trans
+            &trans         &trans     &trans      &trans      &trans                                                                                                      &trans        &trans       &trans         &trans      &trans
+            &trans         &trans     &trans      &trans      &trans      &trans                                                                              &trans      &trans        &trans       &trans         &trans      &trans
+            &trans         &trans     &trans      &trans      &kp ASTRK   &kp F11                                                                             &kp SEMI    &kp N0        &kp N1       &kp N2         &kp BSPC    &trans
+            &trans         &kp TAB    &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT                                                                           &kp DOT     &kp N3        &kp N4       &kp N5         &kp N6      &trans
+            &trans         &trans     &trans      &kp ESC     &kp TAB     &kp ASTRK &trans      &trans      &trans     &to GAMING &trans   &trans              &kp COMMA   &kp N7        &kp N8       &kp N9         &trans      &trans
+            &trans         &trans     &trans      &trans      &trans                &trans      &trans      &trans     &trans     &trans   &trans                          &trans        &trans       &trans         &trans      &trans
+            >;
+        };
+
+        i3_layer {
+            // ---------------------------------------------------------------------------------------------------------------------------------
+            // i3/gui shortcuts layer — matches altair_x layer 3
+
+            bindings = <
+            &trans              &trans          &trans           &trans           &trans                                                                                                                                  &trans          &trans          &trans          &trans          &trans
+            &trans              &trans          &trans           &trans           &trans           &trans                                                                                                      &trans      &trans          &trans          &trans          &trans          &trans
+            &trans              &kp LG(LS(Q))  &kp LG(S)       &kp LG(E)       &kp LG(R)       &kp LG(W)                                                                                                    &kp LG(Y)  &kp LG(N0)     &kp LG(N1)     &kp LG(N2)     &kp LG(P)      &trans
+            &trans              &kp LG(D)      &kp LG(LEFT)    &kp LG(DOWN)    &kp LG(UP)      &kp LG(RIGHT)                                                                                                &kp LG(H)  &kp LG(N3)     &kp LG(N4)     &kp LG(N5)     &kp LG(N6)     &trans
+            &trans              &bootloader    &kp LG(F)       &kp LG(C)       &kp LG(V)       &kp LG(T)     &trans      &trans      &trans     &trans    &trans    &trans                                   &kp LG(LS(S)) &kp LG(N7) &kp LG(N8)     &kp LG(N9)     &trans          &trans
+            &trans              &trans         &trans           &trans          &trans                        &kp LG(SPACE) &trans    &trans     &trans    &trans    &trans                                                &trans          &trans          &trans          &trans          &trans
+            >;
+        };
+
+        gaming_layer {
+            // ---------------------------------------------------------------------------------------------------------------------------------
+            // gaming layer — plain qwerty, no homerow mods, matches altair_x layer 4
+
+            bindings = <
+            &kp F1         &kp F2   &kp F3      &kp F4      &kp F5                                                                                                    &kp F6  &kp F7         &kp F8         &kp F9      &kp F10
+            &kp EQUAL      &kp N1   &kp N2      &kp N3      &kp N4      &kp N5                                                                              &kp N6    &kp N7  &kp N8         &kp N9         &kp N0      &kp MINUS
+            &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp FSLH                                                                             &kp Y     &kp U   &kp I          &kp O          &kp P       &kp BSPC
+            &kp ESC        &kp A    &kp S       &kp D       &kp F       &kp G                                                                                &kp H     &kp J   &kp K          &kp L          &kp RET     &kp SQT
+            &none          &kp Z    &kp X       &kp C       &kp V       &kp T     &kp LCTL    &kp LALT    &kp LSHFT  &none     &kp RALT  &kp RSHFT            &kp B     &kp N   &kp M          &kp ESC        &kp RCTRL   &kp RGUI
+            &to DEFAULT    &none    &none       &none       &none                 &kp SPACE   &mo SYM     &none      &none     &kp RSFT  &mo NUM                        &none   &none          &none          &none       &none
             >;
         };
 
