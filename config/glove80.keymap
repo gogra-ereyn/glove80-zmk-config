@@ -10,6 +10,9 @@
 #include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/rgb.h>
+
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20
 #include <dt-bindings/zmk/mouse.h>
 
 #define DEFAULT 0
@@ -19,17 +22,19 @@
 #define GAMING  4
 #define MAGIC   5
 #define MOUSE   6
-
 #define MSLOW   7
+
+#define U_MOUSE_MOVE_SLOW 200
+#define U_MOUSE_SCRL_SLOW 4
 
 #define MS_U MOVE_Y(-U_MOUSE_MOVE_SLOW)
 #define MS_D MOVE_Y(U_MOUSE_MOVE_SLOW)
 #define MS_L MOVE_X(-U_MOUSE_MOVE_SLOW)
 #define MS_R MOVE_X(U_MOUSE_MOVE_SLOW)
-#define SS_U SCROLL_Y(U_MOUSE_SCRL_SLOW)
-#define SS_D SCROLL_Y(-U_MOUSE_SCRL_SLOW)
-#define SS_L SCROLL_X(-U_MOUSE_SCRL_SLOW)
-#define SS_R SCROLL_X(U_MOUSE_SCRL_SLOW)
+#define SS_U MOVE_Y(U_MOUSE_SCRL_SLOW)
+#define SS_D MOVE_Y(-U_MOUSE_SCRL_SLOW)
+#define SS_L MOVE_X(-U_MOUSE_SCRL_SLOW)
+#define SS_R MOVE_X(U_MOUSE_SCRL_SLOW)
 
 #define U_MOUSE_MOVE_SLOW 200
 #define U_MOUSE_SCRL_SLOW 4
