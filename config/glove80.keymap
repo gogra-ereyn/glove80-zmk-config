@@ -258,17 +258,17 @@
             // mouse layer — vim-style movement on right hand, clicks on left hand
             // |       |     |     |      |      |                                                               |       |       |      |       |      |
             // |       |     |     |      |      |      |                                                 |      |       |       |      |       |      |
-            // |       |     |     |      |      |      |                                                 | SC_L | SC_D  | SC_U  | SC_R |       |      |
-            // |       |     | LCLK| RCLK | MCLK |      |                                                 | M_L  | M_D   | M_U   | M_R  |       |      |
-            // |       |     |     | LCTRL| LALT |      |       |       |       | |       |       |       |      | LCLK  | RCLK  |      |       |      |
+            // |       |     |     |      |      |      |                                                 |      | SC_L  | SC_D  | SC_U | SC_R  |      |
+            // |       |     | LCLK| RCLK | MCLK |      |                                                 |      | M_L   | M_D   | M_U  | M_R   |      |
+            // |       |     |     | LCTRL| LALT |      |       |       |       | |       |       |       |      | LCLK  | RCLK  | ESC  |       |      |
             // |       |     |     |      |      |      |       | LSHFT |       | |DEFAULT|       |       |      |       |       |      |       |      |
 
             bindings = <
             &none          &none    &none       &none       &none                                                                                                             &none              &none              &none              &none               &none
             &none          &none    &none       &none       &none       &none                                                                                       &none     &none              &none              &none              &none               &none
-            &none          &none    &none       &none       &none       &none                                                                                       &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP  &msc SCRL_RIGHT    &none               &none
-            &none          &none    &mkp LCLK   &mkp RCLK   &mkp MCLK   &none                                                                                      &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP  &mmv MOVE_RIGHT    &none               &none
-            &none          &none    &none       &kp LCTRL   &kp LALT    &none   &none       &none       &none      &none     &none     &none                        &none     &mkp LCLK          &mkp RCLK          &none              &none               &none
+            &none          &none    &none       &none       &none       &none                                                                                       &none          &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP       &msc SCRL_RIGHT     &none
+            &none          &none    &mkp LCLK   &mkp RCLK   &mkp MCLK   &none                                                                                      &none          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP       &mmv MOVE_RIGHT     &none
+            &none          &none    &none       &kp LCTRL   &kp LALT    &none   &none       &none       &none      &none     &none     &none                        &none     &mkp LCLK          &mkp RCLK          &kp ESC            &none               &none
             &none          &none    &none       &none       &none               &mo MSLOW   &kp LSHFT   &none      &to DEFAULT &none   &none                                  &none              &none              &none              &none               &none
             >;
         };
@@ -280,9 +280,9 @@
             bindings = <
             &none          &none    &none       &none       &none                                                                                                             &none          &none          &none          &none           &none
             &none          &none    &none       &none       &none       &none                                                                                       &none     &none          &none          &none          &none           &none
-            &none          &none    &none       &none       &none       &none                                                                                       &msc SS_L  &msc SS_D      &msc SS_U      &msc SS_R      &none           &none
-            &none          &none    &mkp LCLK   &mkp RCLK   &mkp MCLK   &none                                                                                      &mmv MS_L  &mmv MS_D      &mmv MS_U      &mmv MS_R      &none           &none
-            &none          &none    &none       &kp LCTRL   &kp LALT    &none   &none       &none       &none      &none     &none     &none                        &none     &mkp LCLK      &mkp RCLK      &none          &none           &none
+            &none          &none    &none       &none       &none       &none                                                                                       &none      &msc SS_L      &msc SS_D      &msc SS_U      &msc SS_R       &none
+            &none          &none    &mkp LCLK   &mkp RCLK   &mkp MCLK   &none                                                                                      &none      &mmv MS_L      &mmv MS_D      &mmv MS_U      &mmv MS_R       &none
+            &none          &none    &none       &kp LCTRL   &kp LALT    &none   &none       &none       &none      &none     &none     &none                        &none     &mkp LCLK      &mkp RCLK      &kp ESC        &none           &none
             &none          &none    &none       &none       &none               &trans      &kp LSHFT   &none      &to DEFAULT &none   &none                                  &none          &none          &none          &none           &none
             >;
         };
