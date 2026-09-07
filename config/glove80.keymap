@@ -20,6 +20,20 @@
 #define MAGIC   5
 #define MOUSE   6
 
+#define MSLOW   7
+
+#define MS_U MOVE_Y(-U_MOUSE_MOVE_SLOW)
+#define MS_D MOVE_Y(U_MOUSE_MOVE_SLOW)
+#define MS_L MOVE_X(-U_MOUSE_MOVE_SLOW)
+#define MS_R MOVE_X(U_MOUSE_MOVE_SLOW)
+#define SS_U SCROLL_Y(U_MOUSE_SCRL_SLOW)
+#define SS_D SCROLL_Y(-U_MOUSE_SCRL_SLOW)
+#define SS_L SCROLL_X(-U_MOUSE_SCRL_SLOW)
+#define SS_R SCROLL_X(U_MOUSE_SCRL_SLOW)
+
+#define U_MOUSE_MOVE_SLOW 200
+#define U_MOUSE_SCRL_SLOW 4
+
 &sl {
     ignore-modifiers;
 };
@@ -250,7 +264,21 @@
             &none          &none    &none       &none       &none       &none                                                                                       &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP  &msc SCRL_RIGHT    &none               &none
             &none          &none    &mkp LCLK   &mkp RCLK   &mkp MCLK   &none                                                                                      &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP  &mmv MOVE_RIGHT    &none               &none
             &none          &none    &none       &kp LCTRL   &kp LALT    &none   &none       &none       &none      &none     &none     &none                        &none     &mkp LCLK          &mkp RCLK          &none              &none               &none
-            &none          &none    &none       &none       &none               &none       &kp LSHFT   &none      &to DEFAULT &none   &none                                  &none              &none              &none              &none               &none
+            &none          &none    &none       &none       &none               &mo MSLOW   &kp LSHFT   &none      &to DEFAULT &none   &none                                  &none              &none              &none              &none               &none
+            >;
+        };
+
+        mouse_slow_layer {
+            // slow mouse — same layout as mouse layer but with reduced speed values
+            // activated by holding inner left thumb while in mouse layer
+
+            bindings = <
+            &none          &none    &none       &none       &none                                                                                                             &none          &none          &none          &none           &none
+            &none          &none    &none       &none       &none       &none                                                                                       &none     &none          &none          &none          &none           &none
+            &none          &none    &none       &none       &none       &none                                                                                       &msc SS_L  &msc SS_D      &msc SS_U      &msc SS_R      &none           &none
+            &none          &none    &mkp LCLK   &mkp RCLK   &mkp MCLK   &none                                                                                      &mmv MS_L  &mmv MS_D      &mmv MS_U      &mmv MS_R      &none           &none
+            &none          &none    &none       &kp LCTRL   &kp LALT    &none   &none       &none       &none      &none     &none     &none                        &none     &mkp LCLK      &mkp RCLK      &none          &none           &none
+            &none          &none    &none       &none       &none               &trans      &kp LSHFT   &none      &to DEFAULT &none   &none                                  &none          &none          &none          &none           &none
             >;
         };
     };
